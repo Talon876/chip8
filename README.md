@@ -1,4 +1,4 @@
-chip8
+Chip8
 =====
 
-Chip-8 Emulator
+Chip-8 Emulator written in Java.
