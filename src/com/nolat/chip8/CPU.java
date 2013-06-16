@@ -72,10 +72,86 @@ public class CPU {
         stack = new int[16]; //16 level stack
         keys = new boolean[16]; //16 keys
 
+        //reset registers
+        for (int i = 0; i < 0xF; i++) {
+            V[i] = 0;
+        }
+
         programCounter = 0x200; //set program counter to 200
         opcode = 0;
         indexRegister = 0;
         stackPointer = 0;
+        delayTimer = 0;
+        soundTimer = 0;
 
+    }
+
+    /**
+     * Gets the value in the specified register
+     * 
+     * @param v
+     *            the register to get the value of (0-F).
+     * @return the value in the register
+     */
+    public int getRegister(int v) {
+        if (v < 0 || v > 15) {
+            throw new IllegalArgumentException("Register must be in the range 0 through 15, but was " + v);
+        }
+        return V[v];
+    }
+
+    public int getIndexRegister() {
+        return indexRegister;
+    }
+
+    public int getProgramCounter() {
+        return programCounter;
+    }
+
+    public int getOpCode() {
+        return opcode;
+    }
+
+    public int getSoundTimer() {
+        return soundTimer;
+    }
+
+    public int getDelayTimer() {
+        return delayTimer;
+    }
+
+    /**
+     * Sets specified register to specified value.
+     * 
+     * @param reg
+     *            the register to set the value of (0-F)
+     * @param value
+     *            the 8 bit value to set the register to.
+     */
+    public void setRegister(int reg, int value) {
+        if (reg < 0 || reg > 15) {
+            throw new IllegalArgumentException("Register must be in the range 0 through 15, but was " + reg);
+        }
+        V[reg] = value & 0xFF; //AND with 0xFF to ensure only 8 bit values are inserted.
+    }
+
+    /**
+     * Sets the index register to a value.
+     * 
+     * @param value
+     *            The 16 bit value to set the index register to.
+     */
+    public void setIndexRegister(int value) {
+        indexRegister = value & 0xFFFF; //AND with 0xFFFF to ensure only 16 bit values are inserted.
+    }
+
+    /**
+     * Sets the program counter to a value.
+     * 
+     * @param value
+     *            The 16 bit value to set the program counter to.
+     */
+    public void setProgramCounter(int value) {
+        programCounter = value & 0xFFFF; //AND with 0xFFFF to ensure only 16 bit values are inserted.
     }
 }
