@@ -6,11 +6,11 @@ public class Chip8 {
 
     public Chip8() {
         cpu = new CPU();
+        ROM maze = new ROM("roms/maze.ch8");
+        for (int b : maze.getBytes()) {
+            printValue(b);
+        }
 
-        //        printValue(cpu.getRegister(0));
-        //        cpu.setRegister(0, 38);
-        //        printValue(cpu.getRegister(0));
-        //        printValue(cpu.getProgramCounter());
     }
 
     public static void main(String[] args) {
@@ -24,7 +24,9 @@ public class Chip8 {
      *            the value to print.
      */
     public static void printValue(int value) {
-        System.out.println("D: " + value + "; H: 0x" + Integer.toHexString(value) + "; B: 0b"
-                + Integer.toBinaryString(value));
+        String dec = Integer.toString(value);
+        String hex = "0x" + Integer.toHexString(value);
+        String bin = "0b" + Integer.toBinaryString(value);
+        System.out.println(String.format("0x%04X | %04d", value, value));
     }
 }

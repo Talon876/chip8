@@ -108,6 +108,21 @@ public class CPU {
         return programCounter;
     }
 
+    /**
+     * Load byte from memory locatoin
+     * 
+     * @param l
+     *            The memory address to load the byte from
+     * @return the byte at address l
+     */
+    public int getByte(int l) {
+        if (l < 0 || l > memory.length) {
+            throw new IllegalArgumentException("Memory location must be between 0 and " + memory.length + " but was: "
+                    + l);
+        }
+        return memory[l];
+    }
+
     public int getOpCode() {
         return opcode;
     }
@@ -153,5 +168,31 @@ public class CPU {
      */
     public void setProgramCounter(int value) {
         programCounter = value & 0xFFFF; //AND with 0xFFFF to ensure only 16 bit values are inserted.
+    }
+
+    /**
+     * Sets the byte at memory location l to value b.
+     * 
+     * @param l
+     *            the memory location to update
+     * @param b
+     *            the value the memory location should be set to
+     */
+    public void setByte(int l, int b) {
+        if (l < 0 || l > memory.length) {
+            throw new IllegalArgumentException("Memory location must be between 0 and " + memory.length + " but was: "
+                    + l);
+        }
+        memory[l] = b & 0xFF; //AND with 0xFF to ensure only 8 bit values are inserted.
+    }
+
+    /**
+     * Loads a ROM in to memory at offset 0x200.
+     * 
+     * @param rom
+     *            the rom to load.
+     */
+    public void loadRom(IRom rom) {
+
     }
 }
