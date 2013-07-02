@@ -5,15 +5,15 @@ public class Chip8 {
     private CPU cpu;
 
     public Chip8() {
-        cpu = new CPU();
         ROM maze = new ROM("roms/maze.ch8");
-        //        for (int b : maze.getBytes()) {
-        //            printValue(b);
-        //        }
+
+        cpu = new CPU();
         cpu.loadRom(maze);
-        for (int b : cpu.getMemory()) {
-            printValue(b);
-        }
+
+        ConsoleScreen screen = new ConsoleScreen();
+
+        Emulator emulator = new Emulator(cpu, screen);
+        emulator.start();
     }
 
     public static void main(String[] args) {

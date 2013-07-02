@@ -205,4 +205,13 @@ public class CPU {
             memory[0x200 + i] = rom.getBytes()[i];
         }
     }
+
+    /**
+     * Debug method. Dumps memory contents to console.
+     */
+    private void dumpMemory() {
+        for (int b : getMemory()) {
+            Chip8.printValue(b);
+        }
+    }
 }
