@@ -13,7 +13,7 @@ public class CPU {
 
     /**
      * Array of 4096 bytes which serves as the machine's memory. <br>
-     * 0x000 - 0x1FF: Chip8 interprete and font set. <br>
+     * 0x000 - 0x1FF: Chip8 interpreter and font set. <br>
      * 0x050 - 0x0A0: Built in 4x5 pixel font set (0-F) <br>
      * 0x200 - 0xFFF: Program ROM and work RAM.
      */
@@ -84,6 +84,14 @@ public class CPU {
         delayTimer = 0;
         soundTimer = 0;
 
+    }
+
+    /**
+     * 
+     * @return the array of integers representing the memory.
+     */
+    public int[] getMemory() {
+        return memory.clone();
     }
 
     /**
@@ -193,6 +201,8 @@ public class CPU {
      *            the rom to load.
      */
     public void loadRom(IRom rom) {
-
+        for (int i = 0; i < rom.getSize(); i++) {
+            memory[0x200 + i] = rom.getBytes()[i];
+        }
     }
 }

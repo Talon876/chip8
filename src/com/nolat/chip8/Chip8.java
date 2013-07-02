@@ -7,10 +7,13 @@ public class Chip8 {
     public Chip8() {
         cpu = new CPU();
         ROM maze = new ROM("roms/maze.ch8");
-        for (int b : maze.getBytes()) {
+        //        for (int b : maze.getBytes()) {
+        //            printValue(b);
+        //        }
+        cpu.loadRom(maze);
+        for (int b : cpu.getMemory()) {
             printValue(b);
         }
-
     }
 
     public static void main(String[] args) {
